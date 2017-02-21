@@ -13,14 +13,13 @@ makeCacheMatrix <- function(x = matrix()) {
 }
         get <- function() x
         setinv <- function(inv) minv <<- inv
-        getInv <- function() minv
+        getinv <- function() minv
         list(set = set,
              get = get,
              setinv = setinv,
              getinv = getinv)
 
 }
-
 
 ## This function computes the inverse of the special "matrix" returned by makeCacheMatrix above
 
@@ -31,10 +30,9 @@ cacheSolve <- function(x, ...)
         minv <- x$getinv()
         if (!is.null(minv)) 
 {
-        print("cached info")
         return(minv)
 }
-              minv <- solve(x$getinv())
+              minv <- solve(x$get())
               x$setinv(minv)
         minv
 }
